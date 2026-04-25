@@ -1,3 +1,4 @@
+import React from 'react';
 import Card from '@/components/Card';
 import { AnalyticsDataset } from '@/lib/analytics/types';
 import {
@@ -11,7 +12,7 @@ import {
   YAxis,
 } from 'recharts';
 
-export default function TimeSeriesChart({ dataset }: { dataset: AnalyticsDataset }) {
+const TimeSeriesChart = React.memo(({ dataset }: { dataset: AnalyticsDataset }) => {
   return (
     <Card>
       <h2 className="text-xl font-semibold glow-text mb-4">Historical Metrics</h2>
@@ -30,12 +31,16 @@ export default function TimeSeriesChart({ dataset }: { dataset: AnalyticsDataset
               labelStyle={{ color: '#ffffff' }}
             />
             <Legend />
-            <Line type="monotone" dataKey="contractInvocations" stroke="#8b5cf6" strokeWidth={2} dot={false} />
-            <Line type="monotone" dataKey="xlmRevenue" stroke="#06b6d4" strokeWidth={2} dot={false} />
-            <Line type="monotone" dataKey="successRate" stroke="#3b82f6" strokeWidth={2} dot={false} />
+            <Line type="monotone" dataKey="contractInvocations" stroke="#8b5cf6" strokeWidth={2} dot={false} isAnimationActive={false} />
+            <Line type="monotone" dataKey="xlmRevenue" stroke="#06b6d4" strokeWidth={2} dot={false} isAnimationActive={false} />
+            <Line type="monotone" dataKey="successRate" stroke="#3b82f6" strokeWidth={2} dot={false} isAnimationActive={false} />
           </LineChart>
         </ResponsiveContainer>
       </div>
     </Card>
   );
-}
+});
+
+TimeSeriesChart.displayName = 'TimeSeriesChart';
+
+export default TimeSeriesChart;
